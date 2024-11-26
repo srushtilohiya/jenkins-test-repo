@@ -56,6 +56,7 @@ pipeline {
                     sshagent(credentials: ['Ubuntu EC2 Instance']) {
                         sh '''#!/bin/bash
                         # SSH into EC2 and pull latest changes
+                        sh 'git clone git@github.com:jenkins-test-repo.git
                         ssh -o StrictHostKeyChecking=no ubuntu@3.110.136.70 "
                             cd cd /home/ubuntu/my-java-project/ &&
                             git pull &&
