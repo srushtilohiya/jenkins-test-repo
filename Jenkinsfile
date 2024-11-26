@@ -53,7 +53,7 @@ pipeline {
     steps {
                 script {
                     // SSH into EC2 and deploy the app (ensure your EC2 has Java & Node.js installed)
-                    sshagent(credentials: ['Ubuntu EC2 Instance' ]) {
+                    sshagent(credentials: ['Ubuntu EC2 Instance']) {
                         sh '''#!/bin/bash
                         # SSH into EC2 and pull latest changes
                         ssh -o StrictHostKeyChecking=no ubuntu@3.110.136.70 "
