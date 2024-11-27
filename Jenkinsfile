@@ -15,7 +15,15 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/srushtilohiya/jenkins-test-repo.git'
+                script {
+                    // Ensure GitHub SSH key is in known_hosts
+                    sh '''#!/bin/bash
+                        # Add GitHub's SSH key to known_hosts to avoid Host key verification failed error
+                        ssh-keyscan github.com >> ~/.ssh/known_hosts
+                    '''
+                    // Checkout the repository
+                    git 'https://github.com/srushtilohiya/jenkins-test-repo.git'
+                }
             }
         }
 
@@ -55,9 +63,12 @@ pipeline {
                     // SSH into EC2 and deploy the app (ensure your EC2 has Java & Node.js installed)
                     sshagent(credentials: ['Ubuntu EC2 Instance']) {
                         sh '''#!/bin/bash
+                        # Add GitHub's SSH key to known_hosts to avoid Host key verification failed error
+                        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
                         # SSH into EC2 and pull latest changes
                         git clone git@github.com:srushtilohiya/jenkins-test-repo.git
-                        ssh -o StrictHostKeyChecking=no ubuntu@13.235.86.131 <<EOF
+                        ssh -o StrictHostKeyChecking=no ubuntu@3.110.136.70 <<EOF
                             cd /home/ubuntu/my-java-project/
                             git pull
                             mvn clean install
@@ -80,4 +91,3 @@ pipeline {
         }
     }
 }
-
