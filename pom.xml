@@ -40,6 +40,8 @@
                         <configuration>
                             <!-- Specify the fully-qualified class name of your main class here -->
                             <mainClass>com.example.Main</mainClass>
+                            <!-- Ensure that dependencies are available on the classpath -->
+                            <classpathScope>compile</classpathScope>
                         </configuration>
                     </execution>
                 </executions>
