@@ -56,7 +56,7 @@ pipeline {
                         fi
 
                         # SSH into the EC2 instance and deploy the app
-                        ssh -o StrictHostKeyChecking=no ubuntu@13.235.86.131 <<EOF
+                        ssh -o StrictHostKeyChecking=no ubuntu@13.235.86.183 <<EOF
                             cd /home/ubuntu/my-java-project/
                             git pull
                             mvn clean install
