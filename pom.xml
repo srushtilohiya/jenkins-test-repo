@@ -39,26 +39,23 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Jar Plugin -->
+            <!-- Exec Maven Plugin for running the Main class -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>java</goal>
                         </goals>
                         <configuration>
-                            <archive>
-                                <manifestEntries>
-                                    <Main-Class>com.example.Main</Main-Class>
-                                </manifestEntries>
-                            </archive>
+                            <mainClass>com.example.Main</mainClass> <!-- Replace with your main class -->
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 
