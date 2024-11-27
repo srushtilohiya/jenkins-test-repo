@@ -8,30 +8,21 @@ pipeline {
     }
 
     environment {
-        GITHUB_CREDENTIALS = 'github-token'  // GitHub credentials ID
-        EC2_SSH_KEY = 'Ubuntu EC2 Instance'  // EC2 SSH Key credential ID
+        GITHUB_CREDENTIALS = 'github-token'
+        EC2_SSH_KEY = 'Ubuntu EC2 Instance'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    // Ensure GitHub SSH key is in known_hosts
-                    sh '''#!/bin/bash
-                        # Add GitHub's SSH key to known_hosts to avoid Host key verification failed error
-                        ssh-keyscan github.com >> ~/.ssh/known_hosts
-                    '''
-                    // Checkout the repository
-                    git 'https://github.com/srushtilohiya/jenkins-test-repo.git'
-                }
+                git 'https://github.com/srushtilohiya/jenkins-test-repo.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install Maven dependencies
-                    sh 'mvn clean install'  // For Java dependencies
+                    sh 'mvn clean install'
                 }
             }
         }
@@ -39,11 +30,7 @@ pipeline {
         stage('Build App') {
             steps {
                 script {
-                    // Build Java application using Maven
-                    sh 'mvn package'  // This will compile the Java code and package it into a .jar file
-
-                    // If you have a frontend component, you can also build with npm
-                    // sh 'npm run build'  // Uncomment this if you have a frontend
+                    sh 'mvn package'
                 }
             }
         }
@@ -51,8 +38,7 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 script {
-                    // Run tests with Maven
-                    sh 'mvn test'  // This will execute unit tests using Maven
+                    sh 'mvn test'
                 }
             }
         }
@@ -60,14 +46,16 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 script {
-                    // SSH into EC2 and deploy the app (ensure your EC2 has Java & Node.js installed)
                     sshagent(credentials: ['Ubuntu EC2 Instance']) {
                         sh '''#!/bin/bash
-                        # Add GitHub's SSH key to known_hosts to avoid Host key verification failed error
-                        ssh-keyscan github.com >> ~/.ssh/known_hosts
+                        # Check if the repository exists and pull the latest changes
+                        if [ ! -d "jenkins-test-repo" ]; then
+                            git clone https://github.com/srushtilohiya/jenkins-test-repo.git
+                        else
+                            cd jenkins-test-repo && git pull
+                        fi
 
-                        # SSH into EC2 and pull latest changes
-                        git clone git@github.com:srushtilohiya/jenkins-test-repo.git
+                        # SSH into the EC2 instance and deploy the app
                         ssh -o StrictHostKeyChecking=no ubuntu@13.235.86.131 <<EOF
                             cd /home/ubuntu/my-java-project/
                             git pull
