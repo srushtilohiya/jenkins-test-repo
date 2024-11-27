@@ -34,7 +34,7 @@
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.8.1</version>
             <configuration>
-                <source>1.8</source> <!-- Or use Java 11 or 17 if applicable -->
+                <source>1.8</source> <!-- Use 1.8 or 17 depending on your Java version -->
                 <target>1.8</target>
             </configuration>
         </plugin>
@@ -47,13 +47,12 @@
             <configuration>
                 <archive>
                     <manifestEntries>
-                        <Main-Class>com.example.Main</Main-Class>  <!-- Replace with your actual Main class -->
+                        <Main-Class>com.example.Main</Main-Class> <!-- This should match your Main class -->
                     </manifestEntries>
                 </archive>
             </configuration>
         </plugin>
     </plugins>
-</build>
-
+ </build>
 
 </project>
