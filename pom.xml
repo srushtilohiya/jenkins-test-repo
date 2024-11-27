@@ -34,7 +34,7 @@
 
     <build>
         <plugins>
-            <!-- Compiler plugin -->
+            <!-- Maven Compiler Plugin for Java 17 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -45,12 +45,12 @@
                     <release>17</release>
                 </configuration>
             </plugin>
-            
-            <!-- Jar Plugin with Main-Class -->
+
+            <!-- Maven Jar Plugin to add Main-Class to the manifest -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version> <!-- Updated to a stable version -->
+                <version>3.2.0</version> <!-- Stable version of the JAR plugin -->
                 <configuration>
                     <archive>
                         <manifestEntries>
@@ -59,9 +59,9 @@
                     </archive>
                 </configuration>
             </plugin>
-            
-            <!-- Optional: Shade Plugin (if you need to bundle dependencies) -->
-            <!-- If you don't need to shade, you can remove this plugin -->
+
+            <!-- Optional: Maven Shade Plugin (if you need a fat JAR) -->
+            <!-- You can remove this plugin if you don't need to bundle dependencies -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
