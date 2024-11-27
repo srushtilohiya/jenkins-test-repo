@@ -18,7 +18,8 @@ pipeline {
                 git 'https://github.com/srushtilohiya/jenkins-test-repo.git'
             }
         }
-                stage('Install Dependencies') {
+
+        stage('Install Dependencies') {
             steps {
                 script {
                     // Install Maven dependencies
@@ -49,20 +50,20 @@ pipeline {
         }
 
         stage('Deploy to EC2') {
-        
-    steps {
+            steps {
                 script {
                     // SSH into EC2 and deploy the app (ensure your EC2 has Java & Node.js installed)
                     sshagent(credentials: ['Ubuntu EC2 Instance']) {
                         sh '''#!/bin/bash
                         # SSH into EC2 and pull latest changes
-                        sh 'git clone git@github.com:jenkins-test-repo.git
-                        ssh -o StrictHostKeyChecking=no ubuntu@3.110.136.70 "
-                            cd cd /home/ubuntu/my-java-project/ &&
-                            git pull &&
-                            mvn clean install &&
-                            mvn package &&
-                            java -jar target/my-java-project-1.0-SNAPSHOT.jar"  # Adjust according to your deployment process
+                        git clone git@github.com:srushtilohiya/jenkins-test-repo.git
+                        ssh -o StrictHostKeyChecking=no ubuntu@3.110.136.70 <<EOF
+                            cd /home/ubuntu/my-java-project/
+                            git pull
+                            mvn clean install
+                            mvn package
+                            java -jar target/my-java-project-1.0-SNAPSHOT.jar
+                        EOF
                         '''
                     }
                 }
@@ -79,4 +80,4 @@ pipeline {
         }
     }
 }
-        
+
