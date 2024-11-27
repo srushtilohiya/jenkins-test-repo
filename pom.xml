@@ -62,4 +62,15 @@
         </plugins>
     </build>
 
+    <!-- Profiles section for explicitly setting Java version -->
+    <profiles>
+        <profile>
+            <id>java17</id>
+            <properties>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>
