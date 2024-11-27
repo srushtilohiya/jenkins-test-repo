@@ -52,11 +52,12 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.0</version> <!-- Stable version of the JAR plugin -->
                 <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Main-Class>com.example.Main</Main-Class> <!-- Replace with your main class -->
-                        </manifestEntries>
-                    </archive>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>com.example.Main</mainClass> <!-- Replace with your main class -->
+                    </manifest>
+                </archive>
                 </configuration>
             </plugin>
 
