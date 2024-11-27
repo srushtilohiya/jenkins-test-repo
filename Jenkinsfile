@@ -68,7 +68,7 @@ pipeline {
 
                         # SSH into EC2 and pull latest changes
                         git clone git@github.com:srushtilohiya/jenkins-test-repo.git
-                        ssh -o StrictHostKeyChecking=no ubuntu@3.110.136.70 <<EOF
+                        ssh -o StrictHostKeyChecking=no ubuntu@13.235.86.131 <<EOF
                             cd /home/ubuntu/my-java-project/
                             git pull
                             mvn clean install
