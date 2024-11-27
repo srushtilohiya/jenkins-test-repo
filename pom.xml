@@ -26,33 +26,34 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <!-- Compiler plugin to use Java 1.8 or later -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> 
-                <configuration>
-                    <source>1.8</source> 
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
+   <build>
+    <plugins>
+        <!-- Maven Compiler Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>1.8</source> <!-- Or use Java 11 or 17 if applicable -->
+                <target>1.8</target>
+            </configuration>
+        </plugin>
 
-            <!-- Maven Jar Plugin to add Main-Class to the manifest -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Main-Class>com.example.Main</Main-Class> <!-- Replace with your Main class fully qualified name -->
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+        <!-- Maven Jar Plugin to include the Main-Class in the manifest -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <archive>
+                    <manifestEntries>
+                        <Main-Class>com.example.Main</Main-Class>  <!-- Replace with your actual Main class -->
+                    </manifestEntries>
+                </archive>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+
 
 </project>
