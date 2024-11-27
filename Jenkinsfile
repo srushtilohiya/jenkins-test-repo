@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         GITHUB_CREDENTIALS = 'github-token'  // GitHub credentials ID
-        EC2_SSH_KEY = 'EC2 Jenkins SSH Key'  // EC2 SSH Key credential ID
+        EC2_SSH_KEY = 'Ubuntu EC2 Instance'  // EC2 SSH Key credential ID
     }
 
     stages {
